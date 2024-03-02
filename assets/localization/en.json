@@ -1,0 +1,24 @@
+
+
+{
+  "Quraan" : "Quraan" ,
+  "ChooseLanguage" : "Choose your language" ,
+  "Next" : "Next" ,
+  "Back" : "Back" ,
+  "PrayerTimes" : "Get prayer times" ,
+  "VariableSchedule" : "Variable schedule" ,
+  "CalculatePrayerTimes" : "Calculate Prayer Times any where" ,
+  "SearchMaps" : "Search (Maps)" ,
+  "LocationName" : "Location name" ,
+  "SureOfYourLocation" : "Make sure your location is set correctly" ,
+  "Longitude" : "Longitude" ,
+  "Latitude" : "Latitude" ,
+  "SetCalculationMethod" : "Set the calculation method" ,
+  "CalculationMethod" : "Calculation Method"  ,
+  "Fajr" : "Fajr" ,
+  "Dhuhr" : "Dhuhr" ,
+  "Asr" : "Asr" ,
+  "Maghrib" : "Maghrib" ,
+  "Isha" : "Isha" ,
+  "ActiveNotifications" : "Active notifications"
+}

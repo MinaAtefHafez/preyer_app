@@ -1,0 +1,25 @@
+
+
+
+{
+  "Quraan" : "القرءان" ,
+  "ChooseLanguage" : "اختر لغتك" ,
+  "Next" : "التالى" ,
+  "Back" : "رجوع" ,
+  "PrayerTimes" : "احصل على اوقات الصلاة" ,
+  "VariableSchedule" : "جدول زمنى متغير" ,
+  "CalculatePrayerTimes" : "حساب اوقات الصلاة فى اى مكان" ,
+  "SearchMaps" : "البحث (خريطة)" , 
+  "LocationName" : "اسم الموقع" ,
+  "SureOfYourLocation" : "تأكد من تعيين موقعك بشكل صحيح" ,
+  "Longitude" : "خط الطول" ,
+  "Latitude" : "خط العرض" ,
+  "SetCalculationMethod" : "ضبط طريقة الحساب" ,
+  "CalculationMethod" : "طريقة الحساب" ,
+  "Fajr" : "الفجر" ,
+  "Dhuhr" : "الظهر" ,
+  "Asr" : "العصر" ,
+  "Maghrib" : "المغرب" ,
+  "Isha" : "العشاء" ,
+  "ActiveNotifications" : "تفعيل الاشعارات"
+}
