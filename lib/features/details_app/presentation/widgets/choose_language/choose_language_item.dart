@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:prayer_app/core/configurations/dependency_injection.dart';
+import 'package:prayer_app/core/dependency_injection/dependency_injection.dart';
 import 'package:prayer_app/core/extensions/distance_ex.dart';
 import 'package:prayer_app/core/theme/app_colors.dart';
 import 'package:prayer_app/core/theme/app_styles.dart';

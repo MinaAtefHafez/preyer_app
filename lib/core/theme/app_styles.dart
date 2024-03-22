@@ -18,7 +18,6 @@ abstract class AppStyles {
   static TextStyle get styleGo18 => GoogleFonts.poppins(
       fontSize: 18.sp, fontWeight: FontWeight.w300, color: Colors.black);
 
-  static TextStyle get style15 => GoogleFonts.poppins (
-      fontSize : 15.sp , fontWeight: FontWeight.w300, color: Colors.black
-  );    
+  static TextStyle get style15 => GoogleFonts.poppins(
+      fontSize: 15.sp, fontWeight: FontWeight.w300, color: Colors.black);
 }

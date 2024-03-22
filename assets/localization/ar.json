@@ -17,9 +17,15 @@
   "SetCalculationMethod" : "ضبط طريقة الحساب" ,
   "CalculationMethod" : "طريقة الحساب" ,
   "Fajr" : "الفجر" ,
+  "Sunrise" : "الشروق" ,
   "Dhuhr" : "الظهر" ,
   "Asr" : "العصر" ,
   "Maghrib" : "المغرب" ,
   "Isha" : "العشاء" ,
-  "ActiveNotifications" : "تفعيل الاشعارات"
+  "Imsak" : "امساك" ,
+  "Midnight" : "منتصف الليل" ,
+  "ActiveNotifications" : "تفعيل الاشعارات" ,
+  "NothingPrayersNow" : "تم انتهاء صلوات اليوم" ,
+  "Error" : "خطأ" ,
+  "Reload" : "اعادة تحميل"
 }

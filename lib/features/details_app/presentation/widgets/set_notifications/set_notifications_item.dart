@@ -18,7 +18,7 @@ class SetNotificationsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 10.w , right: 20.w),
+      padding: EdgeInsets.only(left: 10.w, right: 20.w),
       height: 70.h,
       width: 350.w,
       decoration: BoxDecoration(
@@ -30,7 +30,7 @@ class SetNotificationsItem extends StatelessWidget {
           Text(tr(text),
               style: AppStyles.styleGo20.copyWith(fontWeight: FontWeight.w500)),
           const Spacer(),
-          CustomSwitch(value: value, onChanged: onChanged) ,
+          CustomSwitch(value: value, onChanged: onChanged),
         ],
       ),
     );

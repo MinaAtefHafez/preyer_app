@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prayer_app/core/theme/app_colors.dart';
 
 class CustomIndicator extends StatelessWidget {
   const CustomIndicator({super.key, this.color});
@@ -8,7 +9,7 @@ class CustomIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CircularProgressIndicator(
-      color: color ?? Colors.blue,
+      color: color ?? AppColors.primaryColor,
     );
   }
 }

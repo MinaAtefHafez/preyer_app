@@ -2,11 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:prayer_app/core/configurations/dependency_injection.dart';
+import 'package:prayer_app/core/dependency_injection/dependency_injection.dart';
 import 'package:prayer_app/core/extensions/distance_ex.dart';
 import 'package:prayer_app/core/routes/navigation.dart';
 import 'package:prayer_app/core/theme/app_styles.dart';
 import 'package:prayer_app/core/utils/custom_snack_bar.dart';
+import 'package:prayer_app/features/details_app/data/models/prayer_type_model/prayer_type_model.dart';
 import 'package:prayer_app/features/details_app/presentation/cubit/details_app_cubit.dart';
 import 'package:prayer_app/features/details_app/presentation/cubit/details_app_state.dart';
 import 'package:prayer_app/features/details_app/presentation/widgets/details_app_button.dart';
@@ -43,29 +44,30 @@ class _SetNotificationsScreenState extends State<SetNotificationsScreen> {
           child: BlocBuilder<DetailsAppCubit, DetailsAppState>(
             builder: (context, state) {
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: 25.w),
+                padding: EdgeInsets.symmetric(horizontal: 25.w , vertical: 70.h ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(tr('ActiveNotifications'), style: AppStyles.styleGo25),
                     10.0.sizedHeight,
-                    SizedBox(
-                      height: 500.h,
+                    Expanded(
                       child: ListView.separated(
                           itemBuilder: (context, index) {
-                            final model = detailsAppCubit.prayersTypes[index];
+                            final PrayerTypeModel model =
+                                detailsAppCubit.convertPrayersMap[index];
                             return SetNotificationsItem(
                                 text: model.prayerName!,
                                 value: model.isActiveNotification!,
                                 onChanged: (value) {
                                   detailsAppCubit
                                       .prayerTypeEditNotificationSetting(
-                                          index: index, notif: value);
+                                          prayerName: model.prayerName!,
+                                          notif: value);
                                 });
                           },
                           separatorBuilder: (context, index) =>
                               15.0.sizedHeight,
-                          itemCount: detailsAppCubit.prayersTypes.length),
+                          itemCount: detailsAppCubit.convertPrayersMap.length),
                     ),
                     Row(
                       children: [

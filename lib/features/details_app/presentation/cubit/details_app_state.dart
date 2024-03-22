@@ -1,3 +1,6 @@
+import 'package:prayer_app/features/details_app/data/models/methods_model/methods_model.dart';
+import 'package:prayer_app/features/details_app/data/models/user_location_model.dart';
+
 abstract class DetailsAppState {}
 
 class DetailsAppInitial extends DetailsAppState {}
@@ -16,7 +19,11 @@ class GetCurrentLocationFailure extends DetailsAppState {
   GetCurrentLocationFailure(this.errMessage);
 }
 
-class GetUserLocationLocalSuccess extends DetailsAppState {}
+class GetUserLocationLocalSuccess extends DetailsAppState {
+  final UserLocationModel userLocationModel;
+
+  GetUserLocationLocalSuccess(this.userLocationModel);
+}
 
 class GetUserLocationFailure extends DetailsAppState {
   final String errMessage;
@@ -36,7 +43,11 @@ class GetMethodsFailure extends DetailsAppState {
 
 class GetMethodsSuccess extends DetailsAppState {}
 
-class GetMethodsLocalSuccess extends DetailsAppState {}
+class GetMethodsLocalSuccess extends DetailsAppState {
+  final MethodsModel methodsModel;
+
+  GetMethodsLocalSuccess(this.methodsModel);
+}
 
 class GetMethodsLocalFailure extends DetailsAppState {
   final String errMessaage;
@@ -64,7 +75,11 @@ class SaveMethodChoosenFailure extends DetailsAppState {
   SaveMethodChoosenFailure(this.errMessage);
 }
 
-class GetMethodChoosenLocalSuccess extends DetailsAppState {}
+class GetMethodChoosenLocalSuccess extends DetailsAppState {
+  final MethodsTypeModel methodsTypeModel;
+
+  GetMethodChoosenLocalSuccess(this.methodsTypeModel);
+}
 
 class GetMethodChoosenLocalFailure extends DetailsAppState {
   final String errMessage;
@@ -84,7 +99,11 @@ class SavePrayersTypesSettingsFailure extends DetailsAppState {
   SavePrayersTypesSettingsFailure(this.errMessage);
 }
 
-class GetPrayerTypeSettingsLocalSuccess extends DetailsAppState {}
+class GetPrayerTypeSettingsLocalSuccess extends DetailsAppState {
+  final Map<dynamic, dynamic> prayersSettings;
+
+  GetPrayerTypeSettingsLocalSuccess(this.prayersSettings);
+}
 
 class GetPrayerTypeSettingsLocalFailure extends DetailsAppState {
   final String errMessage;

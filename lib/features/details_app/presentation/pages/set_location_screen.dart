@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prayer_app/core/configurations/dependency_injection.dart';
+import 'package:prayer_app/core/dependency_injection/dependency_injection.dart';
 import 'package:prayer_app/core/extensions/distance_ex.dart';
 import 'package:prayer_app/core/routes/navigation.dart';
 import 'package:prayer_app/core/theme/app_styles.dart';
@@ -42,11 +42,11 @@ class _SetLocationScreenState extends State<SetLocationScreen> {
                   value: 'بركة النصر', label: 'LocationName'),
               15.0.sizedHeight,
               SureLocationTextField(
-                  value: _detailsAppCubit.currentLocation!.latitude.toString(),
+                  value: _detailsAppCubit.userLocationModel!.latitude.toString(),
                   label: 'Latitude'),
               15.0.sizedHeight,
               SureLocationTextField(
-                  value: _detailsAppCubit.currentLocation!.longitude.toString(),
+                  value: _detailsAppCubit.userLocationModel!.longitude.toString(),
                   label: 'Longitude'),
               40.0.sizedHeight,
               Row(

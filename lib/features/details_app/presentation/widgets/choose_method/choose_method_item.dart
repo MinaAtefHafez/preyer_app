@@ -15,7 +15,8 @@ class ChooseMethodItem extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Text(methodsTypeModel.name!, style: AppStyles.styleGo18.copyWith(fontWeight: FontWeight.w600)),
+          child: Text(methodsTypeModel.name!,
+              style: AppStyles.styleGo18.copyWith(fontWeight: FontWeight.w600)),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),

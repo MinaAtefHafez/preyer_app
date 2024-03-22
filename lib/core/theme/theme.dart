@@ -6,14 +6,12 @@ abstract class AppTheme {
   static ThemeData theme() => ThemeData(
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
-          iconTheme: IconThemeData(color: Colors.white ),
-          color: Colors.white,
-          centerTitle: false,
-          elevation: 0.0,
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: AppColors.primaryColor ,
-            statusBarBrightness: Brightness.dark
-          )
-        ),
+            iconTheme: IconThemeData(color: Colors.white),
+            color: Colors.white,
+            centerTitle: false,
+            elevation: 0.0,
+            systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: AppColors.primaryColor,
+                statusBarBrightness: Brightness.dark)),
       );
 }

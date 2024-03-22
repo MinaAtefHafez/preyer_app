@@ -17,7 +17,7 @@ class PrayerTypeModelAdapter extends TypeAdapter<PrayerTypeModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return PrayerTypeModel(
-      prayerName: fields[1] as String,
+      prayerName: fields[1] as String?,
       isActiveNotification: fields[0] as bool?,
     );
   }

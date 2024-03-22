@@ -10,7 +10,7 @@ abstract class DetailsAppRepo {
   late UserLocationModel userLocationModel;
   late MethodsModel methodsModel;
   late MethodsTypeModel methodsTypeModel;
-  late List prayersTypesSettings;
+  late Map<dynamic, dynamic> prayersTypesSettings;
 
   Future<Option<Failure>> putUserLocationData(
       UserLocationModel userLocationModel);
@@ -27,8 +27,9 @@ abstract class DetailsAppRepo {
 
   Future<Either<Failure, MethodsModel>> getAllMethodsLocal();
 
-  Future<Option<Failure>> savePrayersTypesSettings(List prayersTypes);
-  Future<Either<Failure, List>> getPrayersTypesSettings();
+  Future<Option<Failure>> savePrayersTypesSettings(
+      Map<dynamic, dynamic> prayersTypes);
+  Future<Either<Failure, Map<dynamic, dynamic>>> getPrayersTypesSettings();
 }
 
 class DetailsAppRepoImpl extends DetailsAppRepo {
@@ -72,7 +73,8 @@ class DetailsAppRepoImpl extends DetailsAppRepo {
   }
 
   @override
-  Future<Option<Failure>> savePrayersTypesSettings(List prayersTypes) async {
+  Future<Option<Failure>> savePrayersTypesSettings(
+      Map<dynamic, dynamic> prayersTypes) async {
     try {
       await _detailsAppLocalDataSource.savePrayerTypesSettings(
           prayersSettingsList: prayersTypes);
@@ -117,7 +119,8 @@ class DetailsAppRepoImpl extends DetailsAppRepo {
   }
 
   @override
-  Future<Either<Failure, List>> getPrayersTypesSettings() async {
+  Future<Either<Failure, Map<dynamic, dynamic>>>
+      getPrayersTypesSettings() async {
     try {
       final result = await _detailsAppLocalDataSource.getPrayerTypesSettings();
       prayersTypesSettings = result;

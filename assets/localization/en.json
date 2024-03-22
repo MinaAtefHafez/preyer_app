@@ -16,9 +16,15 @@
   "SetCalculationMethod" : "Set the calculation method" ,
   "CalculationMethod" : "Calculation Method"  ,
   "Fajr" : "Fajr" ,
+  "Sunrise" : "Sunrise" ,
   "Dhuhr" : "Dhuhr" ,
   "Asr" : "Asr" ,
   "Maghrib" : "Maghrib" ,
   "Isha" : "Isha" ,
-  "ActiveNotifications" : "Active notifications"
+  "Imsak" : "Imsak" ,
+  "Midnight" : "Midnight",
+  "ActiveNotifications" : "Active notifications" ,
+  "NothingPrayersNow" : "prayers today completed" ,
+  "Error" : "Error" ,
+  "Reload" : "Reload"
 }

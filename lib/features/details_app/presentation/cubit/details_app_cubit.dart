@@ -20,18 +20,20 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
   final DetailsAppRepo _detailsAppRepo;
   final LocationHelper _locationHelper;
   final PermissionHelper _permissionHelper;
-  Position? currentLocation;
   UserLocationModel? userLocationModel;
   MethodsModel? methodsModel;
   MethodsTypeModel methodsTypeModel = MethodsTypeModel.initial();
 
-  List prayersTypes = [
-    PrayerTypeModel(prayerName: 'Fajr'),
-    PrayerTypeModel(prayerName: 'Dhuhr'),
-    PrayerTypeModel(prayerName: 'Asr'),
-    PrayerTypeModel(prayerName: 'Maghrib'),
-    PrayerTypeModel(prayerName: 'Isha')
-  ];
+  Map<dynamic, dynamic> prayersTypes = {
+    "Fajr": PrayerTypeModel(prayerName: 'Fajr'),
+    "Sunrise": PrayerTypeModel(prayerName: 'Sunrise'),
+    "Dhuhr": PrayerTypeModel(prayerName: 'Dhuhr'),
+    "Asr": PrayerTypeModel(prayerName: 'Asr'),
+    "Maghrib": PrayerTypeModel(prayerName: 'Maghrib'),
+    "Isha": PrayerTypeModel(prayerName: 'Isha'),
+    "Imsak": PrayerTypeModel(prayerName: 'Imsak'),
+    "Midnight": PrayerTypeModel(prayerName: 'Midnight'),
+  };
 
   void onLanguageChanged(int value) async {
     languageRadio = value;
@@ -41,13 +43,18 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
     emit(OnLanguageChanged());
   }
 
+  Future<Position> getCurrentLocation() async {
+    final Position position = await _locationHelper.getCurrentPosition();
+    return position;
+  }
+
   Future<void> getCurrentLocationAndSaveItLocal() async {
     final checkPermission = await _permissionHelper.checkLocationPermission();
     if (!checkPermission) return;
     emit(GetCurrentLocationLoading());
-    currentLocation = await _locationHelper.getCurrentPosition();
+    final position = await getCurrentLocation();
     final UserLocationModel userLocation =
-        UserLocationModel.fromPosition(currentLocation!);
+        UserLocationModel.fromPosition(position);
     final result = await _detailsAppRepo.putUserLocationData(userLocation);
     result.fold(() {
       emit(GetCurrentLocationSuccess());
@@ -62,7 +69,7 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
       emit(GetUserLocationFailure(failure.message));
     }, (userLocation) {
       userLocationModel = userLocation;
-      emit(GetUserLocationLocalSuccess());
+      emit(GetUserLocationLocalSuccess(userLocation));
     });
   }
 
@@ -75,6 +82,7 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
       emit(GetMethodsFailure(failure.message));
     }, (model) {
       methodsModel = model;
+      saveAllMethodsLocal();
       emit(GetMethodsSuccess());
     });
   }
@@ -85,7 +93,7 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
       emit(GetMethodsLocalFailure(failure.message));
     }, (model) {
       methodsModel = model;
-      emit(GetMethodsLocalSuccess());
+      emit(GetMethodsLocalSuccess(model));
     });
   }
 
@@ -123,15 +131,17 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
       emit(GetMethodChoosenLocalFailure(failure.message));
     }, (model) {
       methodsTypeModel = model;
-      emit(GetMethodChoosenLocalSuccess());
+      emit(GetMethodChoosenLocalSuccess(model));
     });
   }
 
   //! Settings
 
+  List<dynamic> get convertPrayersMap => prayersTypes.values.toList();
+
   void prayerTypeEditNotificationSetting(
-      {required int index, required bool notif}) {
-    prayersTypes[index].copyWith(isActiveNotification: notif);
+      {required String prayerName, required bool notif}) {
+    prayersTypes[prayerName].copyWith(isActiveNotification: notif);
     emit(PrayerTypeNotificationSetting());
   }
 
@@ -150,7 +160,7 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
       emit(GetPrayerTypeSettingsLocalFailure(failure.message));
     }, (prayerModel) {
       prayersTypes = prayerModel;
-      emit(GetPrayerTypeSettingsLocalSuccess());
+      emit(GetPrayerTypeSettingsLocalSuccess(prayerModel));
     });
   }
 
@@ -174,12 +184,8 @@ class DetailsAppCubit extends Cubit<DetailsAppState> {
     }
   }
 
- @override
+  @override
   void onChange(Change<DetailsAppState> change) {
     super.onChange(change);
   }
 }
-
-
-
-

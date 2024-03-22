@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:prayer_app/core/configurations/dependency_injection.dart';
+import 'package:prayer_app/core/dependency_injection/dependency_injection.dart';
 import 'package:prayer_app/core/extensions/images_ex.dart';
 import 'package:prayer_app/core/helper/local_helper/local_helper.dart';
 import 'package:prayer_app/core/routes/navigation.dart';
 import 'package:prayer_app/core/theme/app_styles.dart';
 import 'package:prayer_app/features/details_app/presentation/cubit/details_app_cubit.dart';
 import 'package:prayer_app/features/details_app/presentation/pages/choose_language_screen.dart';
+import 'package:prayer_app/features/home/presentation/cubit/home_cubit.dart';
 import 'package:prayer_app/features/home/presentation/view/screens/home_screen.dart';
 import '../../../../core/utils/gen/assets.dart';
 
@@ -24,10 +25,10 @@ class _SplashScreenState extends State<SplashScreen>
   late final Animation<double> _fadeAnimation;
   late final Animation<Offset> _slideTransition;
   final detailsAppCubit = sl<DetailsAppCubit>();
+  final homeCubit = sl<HomeCubit>();
   @override
   void initState() {
     super.initState();
-    detailsAppCubit.callLocals();
     initAnimation();
     goTo();
   }

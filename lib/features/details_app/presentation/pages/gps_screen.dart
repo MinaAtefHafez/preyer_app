@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:prayer_app/core/configurations/dependency_injection.dart';
+import 'package:prayer_app/core/dependency_injection/dependency_injection.dart';
 import 'package:prayer_app/core/extensions/distance_ex.dart';
 import 'package:prayer_app/core/routes/navigation.dart';
 import 'package:prayer_app/core/theme/app_colors.dart';

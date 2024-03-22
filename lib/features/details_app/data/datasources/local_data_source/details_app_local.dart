@@ -17,8 +17,9 @@ abstract class DetailsAppLocalDataSource {
 
   Future<MethodsModel> getAllMethods();
 
-  Future<void> savePrayerTypesSettings({required List prayersSettingsList});
-  Future<List> getPrayerTypesSettings();
+  Future<void> savePrayerTypesSettings(
+      {required Map<dynamic, dynamic> prayersSettingsList});
+  Future<Map<dynamic, dynamic>> getPrayerTypesSettings();
 }
 
 class DetailsAppLocalDataSourceImpl implements DetailsAppLocalDataSource {
@@ -45,9 +46,9 @@ class DetailsAppLocalDataSourceImpl implements DetailsAppLocalDataSource {
 
   @override
   Future<void> savePrayerTypesSettings(
-      {required List prayersSettingsList}) async {
+      {required Map<dynamic, dynamic> prayersSettingsList}) async {
     try {
-      await HiveHelper.putData<List>(
+      await HiveHelper.putData<Map<dynamic, dynamic>>(
           key: LocalConstants.prayersTypesSettings, value: prayersSettingsList);
     } on HiveError catch (e) {
       throw LocalException(e.message);
@@ -87,7 +88,7 @@ class DetailsAppLocalDataSourceImpl implements DetailsAppLocalDataSource {
   }
 
   @override
-  Future<List> getPrayerTypesSettings() async {
+  Future<Map<dynamic, dynamic>> getPrayerTypesSettings() async {
     try {
       final data =
           await HiveHelper.getData(key: LocalConstants.prayersTypesSettings);

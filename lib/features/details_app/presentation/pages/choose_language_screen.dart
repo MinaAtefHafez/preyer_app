@@ -10,7 +10,7 @@ import 'package:prayer_app/features/details_app/presentation/pages/gps_screen.da
 import 'package:prayer_app/features/details_app/presentation/widgets/choose_language/choose_language_item.dart';
 import 'package:prayer_app/features/details_app/presentation/widgets/details_app_button.dart';
 import 'package:restart_app/restart_app.dart';
-import '../../../../core/configurations/dependency_injection.dart';
+import '../../../../core/dependency_injection/dependency_injection.dart';
 
 class ChooseLanguageScreen extends StatefulWidget {
   const ChooseLanguageScreen({super.key});

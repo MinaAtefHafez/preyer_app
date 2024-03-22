@@ -14,7 +14,7 @@ class DetailsAppRemoteDataSourceImpl implements DetailsAppRemoteDataSource {
   @override
   Future<Map<String, dynamic>> getMethods() async {
     try {
-      final data = await _apiHelper.get(url: ApiEndPoints.methods );
+      final data = await _apiHelper.get(url: ApiEndPoints.methods);
       return data;
     } on DioException catch (e) {
       throw ServerException(e.message!);

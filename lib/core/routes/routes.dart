@@ -6,11 +6,13 @@ import 'package:prayer_app/features/details_app/presentation/pages/set_location_
 import 'package:prayer_app/features/details_app/presentation/pages/set_method_screen.dart';
 import 'package:prayer_app/features/details_app/presentation/pages/set_notifications_screen.dart';
 import 'package:prayer_app/features/home/presentation/view/screens/home_screen.dart';
+import 'package:prayer_app/features/home/presentation/view/screens/prayers_year_screen.dart';
 import 'package:prayer_app/features/splash/presentation/pages/splash_screen.dart';
 
 class CustomRouter {
   Route onGenerateRoutes(RouteSettings settings) {
     final widget = switch (settings.name) {
+      PrayersYearScreen.name => const PrayersYearScreen() ,
       HomeScreen.name => const HomeScreen(),
       SetNotificationsScreen.name => const SetNotificationsScreen(),
       ChooseMethodScreen.name => const ChooseMethodScreen(),

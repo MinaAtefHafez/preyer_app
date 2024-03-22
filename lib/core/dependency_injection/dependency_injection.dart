@@ -7,10 +7,14 @@ import 'package:prayer_app/features/details_app/data/datasources/local_data_sour
 import 'package:prayer_app/features/details_app/data/datasources/remote_data_source/details_app_remote_data_source.dart';
 import 'package:prayer_app/features/details_app/data/repositories/details_app_repo_impl.dart';
 import 'package:prayer_app/features/details_app/presentation/cubit/details_app_cubit.dart';
+import 'package:prayer_app/features/home/data/data_source/local_data_source/home_local_data_source.dart';
+import 'package:prayer_app/features/home/data/data_source/remote_data_source/home_remote_data_source.dart';
+import 'package:prayer_app/features/home/data/repository/home_repo.dart';
+import 'package:prayer_app/features/home/presentation/cubit/home_cubit.dart';
 
 final sl = GetIt.instance;
 
-Future<void> setUpLocators() async {
+Future<void> setUpLocator() async {
   //! helpers
   sl.registerLazySingleton(() => Dio());
   sl.registerLazySingleton<ApiHelper>(() => DioHelper(sl()));
@@ -24,6 +28,17 @@ Future<void> setUpLocators() async {
       () => DetailsAppRemoteDataSourceImpl(sl()));
   sl.registerLazySingleton<DetailsAppLocalDataSource>(
       () => DetailsAppLocalDataSourceImpl());
-  sl.registerLazySingleton(() => DetailsAppCubit(sl(), sl(), sl()));
+  sl.registerLazySingleton(
+      () => DetailsAppCubit(sl(), sl(), sl())..callLocals());
 
+  //! Home
+
+  //! prayers
+
+  sl.registerLazySingleton<HomeLocalDataSource>(
+      () => HomeLocalDataSourceImpl());
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+      () => HomeRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<HomeRepo>(() => HomeRepoImpl(sl(), sl()));
+  sl.registerLazySingleton(() => HomeCubit(sl(), sl(), sl())..getMonthLocal());
 }

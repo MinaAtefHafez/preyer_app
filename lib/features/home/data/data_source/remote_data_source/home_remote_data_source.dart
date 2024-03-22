@@ -5,6 +5,8 @@ import 'package:prayer_app/core/helper/api_helper/api_helper.dart';
 abstract class HomeRemoteDataSource {
   Future<Map<String, dynamic>> getCalender(
       {required Map<String, dynamic> queryParam, String? year, String? month});
+  Future<Map<String, dynamic>> getCalenderYear(
+      {required Map<String, dynamic> queryParam, String year});
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
@@ -14,19 +16,30 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<Map<String, dynamic>> getCalender(
-      {required Map<String, dynamic> queryParam, String? year, String? month}) {
+      {required Map<String, dynamic> queryParam,
+      String? year,
+      String? month}) async {
     try {
-      final endPoint = month != null
-          ? '${ApiEndPoints.calendar}/${year ?? ''}/$month'
-          : '${ApiEndPoints.calendar}/${year ?? ''}';
-      final data = _apiHelper.get(url: endPoint, queryParam: queryParam);
+      final endPoint = '${ApiEndPoints.calendar}/$year/$month';
+
+      final data = await _apiHelper.get(url: endPoint, queryParam: queryParam);
       return data;
     } on DioException catch (e) {
-      throw ServerException(e.message!);
+      throw ServerException.fromDioException(e);
+    }
+  }
+
+  @override
+  Future<Map<String, dynamic>> getCalenderYear(
+      {required Map<String, dynamic> queryParam, String? year}) async {
+    try {
+      year = year ?? DateTime.now().year.toString();
+      final endPoint = '${ApiEndPoints.calendar}/$year';
+
+      final data = await _apiHelper.get(url: endPoint, queryParam: queryParam);
+      return data;
+    } on DioException catch (e) {
+      throw ServerException.fromDioException(e);
     }
   }
 }
-
-
-
-

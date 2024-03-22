@@ -18,7 +18,6 @@ class MethodsModel {
       _$MethodsModelFromJson(json);
 }
 
-
 @HiveType(typeId: 2)
 @JsonSerializable()
 class MethodsDataModel {

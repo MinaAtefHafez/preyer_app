@@ -1,3 +1,4 @@
+
 abstract class Failure {
   final String message;
 
@@ -6,6 +7,8 @@ abstract class Failure {
 
 class ServerFailure extends Failure {
   ServerFailure(super.message);
+
+  
 }
 
 class LocalFailure extends Failure {

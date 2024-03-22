@@ -1,24 +1,26 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prayer_app/app.dart';
 import 'package:prayer_app/core/helper/local_helper/local_helper.dart';
-import 'package:prayer_app/core/theme/app_colors.dart';
-import 'core/configurations/dependency_injection.dart';
+import 'core/dependency_injection/dependency_injection.dart';
+
+//! Hive Adapter 23
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Future.wait([
     EasyLocalization.ensureInitialized(),
-    setUpLocators(),
+    setUpLocator(),
     HiveHelper.init(),
   ]);
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: AppColors.primaryColor,
+      statusBarColor: Colors.transparent ,
       statusBarBrightness: Brightness.dark));
+
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
     EasyLocalization(
@@ -27,5 +29,3 @@ void main() async {
         child: const PrayerApp()),
   );
 }
-
-
