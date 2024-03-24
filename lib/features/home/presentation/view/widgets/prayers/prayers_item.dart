@@ -9,14 +9,13 @@ import 'package:prayer_app/features/home/data/models/prayer_model_now/prayer_mod
 class PrayersItem extends StatefulWidget {
   const PrayersItem(
       {super.key,
-      required this.isPrayerNext,
+      required this.isPrayerNow,
       required this.prayer,
-      required this.isPrayerPrevious,
       required this.index});
 
-  final bool isPrayerNext;
+  final bool isPrayerNow;
   final PrayerModelNow prayer;
-  final bool isPrayerPrevious;
+
   final int index;
 
   @override
@@ -47,6 +46,12 @@ class _PrayersItemState extends State<PrayersItem>
   }
 
   @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SlideTransition(
       position: _animation,
@@ -54,10 +59,10 @@ class _PrayersItemState extends State<PrayersItem>
         children: [
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric( horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.r),
-                border: widget.isPrayerNext
+                border: widget.isPrayerNow
                     ? Border.all(
                         color: AppColors.primaryColor.withOpacity(0.5),
                         width: 2)
@@ -67,24 +72,22 @@ class _PrayersItemState extends State<PrayersItem>
                 children: [
                   Container(
                     padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30.r),
-                        border: Border.all(
-                            color: widget.isPrayerPrevious
-                                ? Colors.deepOrange.withOpacity(0.5)
-                                : Colors.white,
-                            width: 2.w)),
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 2),
+                    decoration: widget.isPrayerNow
+                        ? BoxDecoration(
+                            color: AppColors.primaryColor.withOpacity(0.3),
+                            borderRadius: BorderRadius.circular(20.r))
+                        : null,
                     child: Text(tr(widget.prayer.prayerName),
                         style: AppStyles.styleGo20.copyWith(
-                            color: widget.isPrayerNext
+                            color: widget.isPrayerNow
                                 ? AppColors.primaryColor
                                 : Colors.grey.shade700)),
                   ),
                   const Spacer(),
                   Text(widget.prayer.prayerDate.split(' ').first,
                       style: AppStyles.styleGo18.copyWith(
-                          color: widget.isPrayerNext
+                          color: widget.isPrayerNow
                               ? AppColors.primaryColor
                               : Colors.grey.shade700,
                           fontWeight: FontWeight.bold)),
@@ -94,7 +97,7 @@ class _PrayersItemState extends State<PrayersItem>
           ),
           30.0.sizedWidth,
           Icon(
-            widget.isPrayerNext ? Icons.mic : Icons.mic_off,
+            widget.isPrayerNow ? Icons.mic : Icons.mic_off,
           )
         ],
       ),

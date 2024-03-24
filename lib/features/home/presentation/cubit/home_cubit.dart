@@ -85,31 +85,57 @@ class HomeCubit extends Cubit<HomeStates> {
       calendarModel = model;
       await getMonthLocal();
       await getPrayersTodayFromCaledarMonthModel();
+      getPrayerNowForToday();
       emit(GetCalendarMonthLocalSuccess());
     });
   }
 
   Future<void> getPrayersTodayFromCaledarMonthModel({DateTime? date}) async {
-    final timeNow = DateFormat('dd').format(date ?? DateTime.now());
+    final timeNow = MethodsHelper.getDayNow(date);
     prayerToday = calendarModel!.data!
         .singleWhere((element) => element.date!.gregorian!.day == timeNow);
-    await getPrayerNow();
+    emit(GetPrayersToday());
   }
 
-  Future<void> getPrayerNow() async {
-    final timeNow = MethodsHelper.getTimeNowIn24();
-    final timeNowDateTime = MethodsHelper.parseTimeIn24(timeNow);
-    for (var element in prayerToday!.timings!.times) {
-      final prayerNowAsString = element.prayerDate.split(' ').first;
+  Future<PrayerModelNow> getPrayerNow(List<PrayerModelNow> prayers) async {
+    final timeNow = MethodsHelper.parseTimeIn24();
+    PrayerModelNow prayerNow = PrayerModelNow(prayerName: 'NothingPrayersNow');
+    for (int index = 0; index < prayers.length; index++) {
+      final prayerNowAsString = prayers[index].prayerDate.split(' ').first;
       final prayerNowDateTime = MethodsHelper.parseTimeIn24(prayerNowAsString);
-      if (prayerNowDateTime.isAfter(timeNowDateTime)) {
-        prayerNow = element;
-        emit(GetPrayerNow());
-        return;
+      if (index == 0 && timeNow.isBefore(prayerNowDateTime)) {
+        prayerNow = prayers[index];
+        break;
+      }
+      if (index < prayers.length - 1) {
+        final prayerNextAsString =
+            prayers[index + 1].prayerDate.split(' ').first;
+        final prayerNextDateTime =
+            MethodsHelper.parseTimeIn24(prayerNextAsString);
+        if (timeNow.isAfter(prayerNowDateTime) &&
+            timeNow.isBefore(prayerNextDateTime)) {
+          prayerNow = prayers[index];
+          break;
+        }
+      }
+
+      final minutseDiffernece = timeNow.difference(prayerNowDateTime).inMinutes;
+      if (index == prayers.length - 1 && minutseDiffernece <= 30) {
+        prayerNow = prayers[index];
+        break;
       }
     }
-    prayerNow = PrayerModelNow(prayerName: 'NothingPrayersNow', prayerDate: '');
+    return prayerNow;
+  }
+
+  Future<void> getPrayerNowForToday() async {
+    prayerNow = await getPrayerNow(prayerToday!.timings!.times);
     emit(GetPrayerNow());
+  }
+
+  bool get isPrayersNowForToday {
+    final today = MethodsHelper.getDayNow();
+    return prayerToday!.date!.gregorian!.day == today;
   }
 
   Future<void> saveMonthLocal() async {

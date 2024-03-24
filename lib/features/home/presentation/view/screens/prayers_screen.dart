@@ -35,7 +35,7 @@ class _PrayersSceenState extends State<PrayersSceen> {
   void callApiOrLocalToGetCalendar() {
     homeCubit.callApiOrLocalToGetCalendar().then((value) {
       Timer.periodic(const Duration(minutes: 1), (timer) {
-        homeCubit.getPrayerNow();
+        homeCubit.getPrayerNowForToday();
       });
     });
   }
@@ -86,6 +86,7 @@ class _PrayersSceenState extends State<PrayersSceen> {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
                                   child: PrayersItems(
+                                    isTimesForToday: homeCubit.isPrayersNowForToday ,
                                       prayerNow: homeCubit.prayerNow!,
                                       times: homeCubit
                                           .prayerToday!.timings!.times))),

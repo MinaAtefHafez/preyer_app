@@ -4,10 +4,15 @@ import 'package:prayer_app/features/home/data/models/prayer_model_now/prayer_mod
 import 'package:prayer_app/features/home/presentation/view/widgets/prayers/prayers_item.dart';
 
 class PrayersItems extends StatelessWidget {
-  const PrayersItems({super.key, required this.times, required this.prayerNow});
+  const PrayersItems(
+      {super.key,
+      required this.times,
+      required this.prayerNow,
+      required this.isTimesForToday});
 
   final List<PrayerModelNow> times;
   final PrayerModelNow prayerNow;
+  final bool isTimesForToday;
 
   @override
   Widget build(BuildContext context) {
@@ -15,10 +20,9 @@ class PrayersItems extends StatelessWidget {
         itemBuilder: (context, index) {
           return PrayersItem(
             index: index,
-            isPrayerPrevious: index < times.length - 1
-                ? prayerNow.prayerName == times[index + 1].prayerName
+            isPrayerNow: isTimesForToday
+                ? prayerNow.prayerName == times[index].prayerName
                 : false,
-            isPrayerNext: prayerNow.prayerName == times[index].prayerName,
             prayer: times[index],
           );
         },

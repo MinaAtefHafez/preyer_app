@@ -469,26 +469,25 @@ class Timings {
     this.midnight,
     this.firstthird,
     this.lastthird,
-  });
+  }) {
+    sortedTimes();
+  }
 
-  List<PrayerModelNow> get times => [
-        PrayerModelNow(prayerName: 'Midnight', prayerDate: midnight!),
-        PrayerModelNow(prayerName: 'Imsak', prayerDate: imsak!),
-        PrayerModelNow(prayerName: 'Fajr', prayerDate: fajr!),
-        PrayerModelNow(prayerName: 'Sunrise', prayerDate: sunrise!),
-        PrayerModelNow(prayerName: 'Dhuhr', prayerDate: dhuhr!),
-        PrayerModelNow(prayerName: 'Asr', prayerDate: asr!),
-        PrayerModelNow(prayerName: 'Maghrib', prayerDate: maghrib!),
-        PrayerModelNow(prayerName: 'Isha', prayerDate: isha!),
-      ];
+  late final List<PrayerModelNow> times = [
+    PrayerModelNow(prayerName: 'Midnight', prayerDate: midnight!),
+    PrayerModelNow(prayerName: 'Imsak', prayerDate: imsak!),
+    PrayerModelNow(prayerName: 'Fajr', prayerDate: fajr!),
+    PrayerModelNow(prayerName: 'Sunrise', prayerDate: sunrise!),
+    PrayerModelNow(prayerName: 'Dhuhr', prayerDate: dhuhr!),
+    PrayerModelNow(prayerName: 'Isha', prayerDate: isha!),
+    PrayerModelNow(prayerName: 'Asr', prayerDate: asr!),
+    PrayerModelNow(prayerName: 'Maghrib', prayerDate: maghrib!),
+  ];
 
-   List <PrayerModelNow> get fivePrayers => [
-       PrayerModelNow(prayerName: 'Fajr', prayerDate: fajr!),
-       PrayerModelNow(prayerName: 'Dhuhr', prayerDate: dhuhr!),
-       PrayerModelNow(prayerName: 'Asr', prayerDate: asr!),
-       PrayerModelNow(prayerName: 'Maghrib', prayerDate: maghrib!),
-       PrayerModelNow(prayerName: 'Isha', prayerDate: isha!),
-   ];   
+  void sortedTimes() {
+    times.sort((a, b) =>
+        a.prayerDate.split(' ').first.compareTo(b.prayerDate.split(' ').first));
+  }
 
   factory Timings.fromJson(Map<String, dynamic> json) => Timings(
         fajr: json['Fajr'] as String?,

@@ -40,14 +40,21 @@ class _CurrentPrayerItemState extends State<CurrentPrayerItem>
     _animationController.forward();
 
     Timer.periodic(const Duration(milliseconds: 500), (timer) {
-      if (isReverse) {
-        _animationController.forward();
-      } else {
-        _animationController.reverse();
+      if (mounted) {
+        if (isReverse) {
+          _animationController.forward();
+        } else {
+          _animationController.reverse();
+        }
       }
-
       isReverse = !isReverse;
     });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,27 +66,25 @@ class _CurrentPrayerItemState extends State<CurrentPrayerItem>
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start ,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisSize: MainAxisSize.min ,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     const Icon(Icons.arrow_forward_ios, color: Colors.white),
                     10.0.sizedWidth,
                     if (widget.prayerNow.prayerDate.isNotEmpty) ...[
-                      Expanded(
-                        child: FadeTransition(
-                          opacity: _animation,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 15),
-                            decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(40.r)),
-                            child: Text(tr(widget.prayerNow.prayerName),
-                                style: AppStyles.styleGo25
-                                    .copyWith(color: Colors.white)),
-                          ),
+                      FadeTransition(
+                        opacity: _animation,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 5, horizontal: 15),
+                          decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.4),
+                              borderRadius: BorderRadius.circular(40.r)),
+                          child: Text(tr(widget.prayerNow.prayerName),
+                              style: AppStyles.styleGo25
+                                  .copyWith(color: Colors.white)),
                         ),
                       ),
                     ] else ...[
@@ -105,7 +110,8 @@ class _CurrentPrayerItemState extends State<CurrentPrayerItem>
                   Padding(
                     padding: const EdgeInsets.only(right: 40),
                     child: Text(widget.prayerNow.prayerDate.split(' ').first,
-                        style: AppStyles.styleGo25.copyWith(color: Colors.white)),
+                        style:
+                            AppStyles.styleGo25.copyWith(color: Colors.white)),
                   ),
                 ]
               ],
@@ -113,7 +119,7 @@ class _CurrentPrayerItemState extends State<CurrentPrayerItem>
           ),
           15.0.sizedWidth,
           ConstrainedBox(
-            constraints:  BoxConstraints(maxHeight: 150.h, maxWidth: 150.w),
+            constraints: BoxConstraints(maxHeight: 150.h, maxWidth: 150.w),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(30.r),
               child: CachedNetworkImage(

@@ -36,6 +36,8 @@ class GetCalendarMonthLocalFailure extends HomeStates {
 
 //! Get Prayer Now
 
+class GetPrayersToday extends HomeStates {}
+
 class GetPrayerNow extends HomeStates {}
 
 //! search for prayers day
